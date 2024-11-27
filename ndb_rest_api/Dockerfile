@@ -18,10 +18,10 @@ ARG DEBIAN_VERSION=bullseye-20241111-slim
 ARG BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION}"
 ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
 
-FROM ${BUILDER_IMAGE} as builder
+FROM ${BUILDER_IMAGE} AS builder
 
 # install build dependencies
-RUN apt-get update -y && apt-get install -y build-essential git \
+RUN apt-get update -y && apt-get install -y build-essential git dos2unix \
     && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # prepare build dir
@@ -62,6 +62,9 @@ COPY config/runtime.exs config/
 
 COPY rel rel
 RUN mix release
+
+# In some cases, build files are generated with CRLF line endings. Convert them back to LF
+RUN dos2unix /app/_build/${MIX_ENV}/rel/ndb_rest_api/bin/*
 
 # start a new build stage so that the final image will only contain
 # the compiled release and other runtime necessities
