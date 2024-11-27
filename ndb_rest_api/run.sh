@@ -1,2 +1,3 @@
-docker-compose up -d
+source .env
+docker compose up -d
 mix phx.server
