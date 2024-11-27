@@ -11,7 +11,7 @@ services:
             - POSTGRES_USER=${POSTGRES_USER}
             - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
         ports:
-            - "5432:5432"
+            - "${POSTGRES_PORT}:${POSTGRES_PORT}"
 
     phoenix:
         container_name: phoenix-app
@@ -24,7 +24,7 @@ services:
             - PHX_HOST=${PHX_HOST}
             - PORT=4000
         ports:
-            - "4000:4000"
+            - "${PHX_PORT}:${PHX_PORT}"
         depends_on:
             - ndb
 
