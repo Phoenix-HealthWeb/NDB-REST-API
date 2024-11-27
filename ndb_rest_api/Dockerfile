@@ -63,7 +63,7 @@ COPY config/runtime.exs config/
 COPY rel rel
 RUN mix release
 
-# In some cases, build files are generated with CRLF line endings. Convert them back to LF
+# Build files will have CRLF line endings if rel/overlays/bin has been generated in Windows. Convert them back to LF
 RUN dos2unix /app/_build/${MIX_ENV}/rel/ndb_rest_api/bin/*
 
 # start a new build stage so that the final image will only contain
