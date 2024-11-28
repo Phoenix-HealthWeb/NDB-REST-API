@@ -8,11 +8,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ndb-deployment
+      app: ndb-postgres
   template:
     metadata:
       labels:
-        app: ndb-deployment
+        app: ndb-postgres
     spec:
       containers:
       - name: postgres
@@ -54,7 +54,7 @@ spec:
     targetPort: 5432
     nodePort: 30001
   selector:
-    app: postgres
+    app: ndb-postgres
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
