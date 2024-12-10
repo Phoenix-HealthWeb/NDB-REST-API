@@ -10,6 +10,8 @@ defmodule NdbRestApi.Application do
     children = [
       NdbRestApiWeb.Telemetry,
       NdbRestApi.Repo,
+      {Ecto.Migrator,
+       repos: Application.fetch_env!(:ndb_rest_api, :ecto_repos), skip: skip_migrations?()},
       {DNSCluster, query: Application.get_env(:ndb_rest_api, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: NdbRestApi.PubSub},
       # Start the Finch HTTP client for sending emails
@@ -32,5 +34,14 @@ defmodule NdbRestApi.Application do
   def config_change(changed, _new, removed) do
     NdbRestApiWeb.Endpoint.config_change(changed, removed)
     :ok
+  end
+
+  defp skip_migrations?() do
+    IO.puts("to mare kea vaka")
+    IO.puts(System.get_env("FORCE_MIGRATIONS"))
+    # By default, sqlite migrations are run when using a release
+    # Additionally, migrations are made if we set the FORCE_MIGRATIONS
+    System.get_env("RELEASE_NAME") != nil &&
+      System.get_env("FORCE_MIGRATIONS") != "true"
   end
 end

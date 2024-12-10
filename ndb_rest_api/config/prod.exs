@@ -12,10 +12,11 @@ config :ndb_rest_api, NdbRestApiWeb.Endpoint,
 config :swoosh, api_client: Swoosh.ApiClient.Finch, finch_name: NdbRestApi.Finch
 
 # Disable Swoosh Local Memory Storage
-config :swoosh, local: false
+config :swoosh, local: true
 
 # Do not print debug messages in production
 config :logger, level: :info
 
 # Runtime production configuration, including reading
 # of environment variables, is done on config/runtime.exs.
+# config :ndb_rest_api, dev_routes: true
