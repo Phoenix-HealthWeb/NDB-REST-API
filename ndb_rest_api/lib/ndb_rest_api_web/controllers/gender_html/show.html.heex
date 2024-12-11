@@ -1,0 +1,15 @@
+<.header>
+  Gender <%= @gender.id %>
+  <:subtitle>This is a gender record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/genders/#{@gender}/edit"}>
+      <.button>Edit gender</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name"><%= @gender.name %></:item>
+</.list>
+
+<.back navigate={~p"/genders"}>Back to genders</.back>

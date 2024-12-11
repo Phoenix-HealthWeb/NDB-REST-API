@@ -1,0 +1,27 @@
+<.header>
+  Listing Patients
+  <:actions>
+    <.link href={~p"/patients/new"}>
+      <.button>New Patient</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="patients" rows={@patients} row_click={&JS.navigate(~p"/patients/#{&1}")}>
+  <:col :let={patient} label="Firstname"><%= patient.firstname %></:col>
+  <:col :let={patient} label="Lastname"><%= patient.lastname %></:col>
+  <:col :let={patient} label="Cf"><%= patient.cf %></:col>
+  <:col :let={patient} label="Gender"><%= patient.gender.name %></:col>
+  <:col :let={patient} label="Date of birth"><%= patient.date_of_birth %></:col>
+  <:action :let={patient}>
+    <div class="sr-only">
+      <.link navigate={~p"/patients/#{patient}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/patients/#{patient}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={patient}>
+    <.link href={~p"/patients/#{patient}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

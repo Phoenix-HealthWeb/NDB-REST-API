@@ -21,6 +21,9 @@ defmodule NdbRestApiWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    resources "/genders", GenderController
+    resources "/patients", PatientController
   end
 
   # Other scopes may use custom stacks.

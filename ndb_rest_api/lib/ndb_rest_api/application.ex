@@ -37,7 +37,6 @@ defmodule NdbRestApi.Application do
   end
 
   defp skip_migrations?() do
-    IO.puts("to mare kea vaka")
     IO.puts(System.get_env("FORCE_MIGRATIONS"))
     # By default, sqlite migrations are run when using a release
     # Additionally, migrations are made if we set the FORCE_MIGRATIONS

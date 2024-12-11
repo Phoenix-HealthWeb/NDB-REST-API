@@ -1,0 +1,23 @@
+<.header>
+  Listing Genders
+  <:actions>
+    <.link href={~p"/genders/new"}>
+      <.button>New Gender</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="genders" rows={@genders} row_click={&JS.navigate(~p"/genders/#{&1}")}>
+  <:col :let={gender} label="Name"><%= gender.name %></:col>
+  <:action :let={gender}>
+    <div class="sr-only">
+      <.link navigate={~p"/genders/#{gender}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/genders/#{gender}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={gender}>
+    <.link href={~p"/genders/#{gender}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>
