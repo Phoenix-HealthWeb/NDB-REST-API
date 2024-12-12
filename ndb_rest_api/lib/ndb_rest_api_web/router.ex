@@ -24,9 +24,12 @@ defmodule NdbRestApiWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", NdbRestApiWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", NdbRestApiWeb.Api, as: :api do
+    pipe_through :api
+
+    resources "/genders", GenderController
+    resources "/patients", PatientController
+  end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:ndb_rest_api, :dev_routes) do
