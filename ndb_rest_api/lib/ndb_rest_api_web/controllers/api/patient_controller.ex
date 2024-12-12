@@ -24,7 +24,7 @@ defmodule NdbRestApiWeb.Api.PatientController do
   end
 
   def show(conn, %{"id" => id}) do
-    patient = Patients.get_patient!(id)
+    patient = Patients.get_patient!(id) |> Repo.preload(:gender)
     render(conn, :show, patient: patient)
   end
 
