@@ -1,0 +1,19 @@
+<.header>
+  Practitioner <%= @practitioner.id %>
+  <:subtitle>This is a practitioner record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/practitioners/#{@practitioner}/edit"}>
+      <.button>Edit practitioner</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Email"><%= @practitioner.email %></:item>
+  <:item title="Forename"><%= @practitioner.forename %></:item>
+  <:item title="Surname"><%= @practitioner.surname %></:item>
+  <:item title="Date of birth"><%= @practitioner.date_of_birth %></:item>
+  <:item title="Qualification"><%= @practitioner.qualification %></:item>
+</.list>
+
+<.back navigate={~p"/practitioners"}>Back to practitioners</.back>

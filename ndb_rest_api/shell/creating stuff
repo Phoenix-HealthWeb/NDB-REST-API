@@ -1,3 +1,3 @@
-mix phx.gen.html Hospitals Hospital hospitals name:string address:string region:string notes:string api_key:string
+mix phx.gen.html Practitioners Practitioner practitioners email:string:unique forename:string surname:string gender_id:references:genders role_id:references:practitioner_roles date_of_birth:date qualification:string
 
-mix phx.gen.json  Hospitals Hospital hospitals name:string address:string region:string notes:string api_key:string --web api --no-context --no-schema
+mix phx.gen.json  mix phx.gen.html Practitioners Practitioner practitioners email:string:unique forename:string surname:string gender_id:references:genders role_id:references:practitioner_roles date_of_birth:date qualification:string --web api --no-context --no-schema
