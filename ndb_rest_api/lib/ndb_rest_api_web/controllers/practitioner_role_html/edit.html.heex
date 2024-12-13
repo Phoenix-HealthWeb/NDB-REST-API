@@ -1,0 +1,8 @@
+<.header>
+  Edit Practitioner role <%= @practitioner_role.id %>
+  <:subtitle>Use this form to manage practitioner_role records in your database.</:subtitle>
+</.header>
+
+<.practitioner_role_form changeset={@changeset} action={~p"/practitioner_roles/#{@practitioner_role}"} />
+
+<.back navigate={~p"/practitioner_roles"}>Back to practitioner_roles</.back>

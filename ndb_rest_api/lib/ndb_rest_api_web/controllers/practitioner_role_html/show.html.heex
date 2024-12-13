@@ -1,0 +1,15 @@
+<.header>
+  Practitioner role <%= @practitioner_role.id %>
+  <:subtitle>This is a practitioner_role record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/practitioner_roles/#{@practitioner_role}/edit"}>
+      <.button>Edit practitioner_role</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name"><%= @practitioner_role.name %></:item>
+</.list>
+
+<.back navigate={~p"/practitioner_roles"}>Back to practitioner_roles</.back>
