@@ -1,0 +1,19 @@
+<.header>
+  Hospital <%= @hospital.id %>
+  <:subtitle>This is a hospital record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/hospitals/#{@hospital}/edit"}>
+      <.button>Edit hospital</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name"><%= @hospital.name %></:item>
+  <:item title="Address"><%= @hospital.address %></:item>
+  <:item title="Region"><%= @hospital.region %></:item>
+  <:item title="Notes"><%= @hospital.notes %></:item>
+  <:item title="Api key"><%= @hospital.api_key %></:item>
+</.list>
+
+<.back navigate={~p"/hospitals"}>Back to hospitals</.back>
