@@ -1,0 +1,31 @@
+<.header>
+Listing Observations
+<:actions>
+<.link href={~p"/observations/new"}>
+<.button>New Observation</.button>
+</.link>
+</:actions>
+</.header>
+
+<.table id="observations" rows={@observations} row_click={&JS.navigate(~p"/observations/#{&1}")}>
+<:col :let={observation} label="Patient">
+<%= "#{observation.patient.firstname} #{observation.patient.lastname}" %>
+</:col>
+<:col :let={observation} label="Practitioner">
+<%= "#{observation.practitioner.forename} #{observation.practitioner.surname}" %>
+</:col>
+<:col :let={observation} label="Ward"><%= observation.ward %></:col>
+                                                             <:col :let={observation} label="Date time"><%= observation.date_time %></:col>
+                                                                                                                                    <:col :let={observation} label="Result"><%= observation.result %></:col>
+  <:action :let={observation}>
+    <div class="sr-only">
+      <.link navigate={~p"/observations/#{observation}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/observations/#{observation}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={observation}>
+    <.link href={~p"/observations/#{observation}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

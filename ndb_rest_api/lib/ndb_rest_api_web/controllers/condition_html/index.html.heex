@@ -8,11 +8,11 @@ Listing Conditions
 </.header>
 
 <.table id="conditions" rows={@conditions} row_click={&JS.navigate(~p"/conditions/#{&1}")}>
-<:col :let={medication_request} label="Patient">
-<%= "#{medication_request.patient.firstname} #{medication_request.patient.lastname}" %>
+<:col :let={condition} label="Patient">
+<%= "#{condition.patient.firstname} #{condition.patient.lastname}" %>
 </:col>
-<:col :let={medication_request} label="Practitioner">
-<%= "#{medication_request.practitioner.forename} #{medication_request.practitioner.surname}" %>
+<:col :let={condition} label="Practitioner">
+<%= "#{condition.practitioner.forename} #{condition.practitioner.surname}" %>
 </:col>
 <:col :let={condition} label="Date time"><%= condition.date_time %></:col>
                                                                    <:col :let={condition} label="Comment"><%= condition.comment %></:col>

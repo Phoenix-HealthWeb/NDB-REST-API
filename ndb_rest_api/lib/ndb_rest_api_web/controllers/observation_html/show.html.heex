@@ -1,0 +1,23 @@
+<.header>
+Observation <%= @observation.id %>
+<:subtitle>This is a observation record from your database.</:subtitle>
+<:actions>
+<.link href={~p"/observations/#{@observation}/edit"}>
+<.button>Edit observation</.button>
+</.link>
+</:actions>
+</.header>
+
+<.list>
+<:item title="Patient">
+<%= "#{@observation.patient.firstname} #{@observation.patient.lastname}" %>
+</:item>
+<:item title="Practitioner">
+<%= "#{@observation.practitioner.forename} #{@observation.practitioner.surname}" %>
+</:item>
+<:item title="Ward"><%= @observation.ward %></:item>
+                                            <:item title="Date time"><%= @observation.date_time %></:item>
+                                                                                                  <:item title="Result"><%= @observation.result %></:item>
+</.list>
+
+<.back navigate={~p"/observations"}>Back to observations</.back>

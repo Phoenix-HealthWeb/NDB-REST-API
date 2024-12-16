@@ -1,0 +1,8 @@
+<.header>
+  New Observation
+  <:subtitle>Use this form to manage observation records in your database.</:subtitle>
+</.header>
+
+<.observation_form changeset={@changeset} patients={@patients} practitioners={@practitioners} action={~p"/observations"} />
+
+<.back navigate={~p"/observations"}>Back to observations</.back>
