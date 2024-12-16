@@ -1,0 +1,24 @@
+<.header>
+Medication request <%= @medication_request.id %>
+<:subtitle>This is a medication_request record from your database.</:subtitle>
+<:actions>
+<.link href={~p"/medication_requests/#{@medication_request}/edit"}>
+<.button>Edit medication_request</.button>
+</.link>
+</:actions>
+</.header>
+
+<.list>
+<:item title="Date time"><%= @medication_request.date_time %></:item>
+                                                             <:item title="Expiration date"><%= @medication_request.expiration_date %></:item>
+                                                                                                                                      <:item title="Medication"><%= @medication_request.medication %></:item>
+                                                                                                                                                                                                     <:item title="Patient">
+                                                                                                                                                                                                     <%= "#{@medication_request.patient.firstname} #{@medication_request.patient.lastname}" %>
+</:item>
+<:item title="Practitioner">
+<%= "#{@medication_request.practitioner.forename} #{@medication_request.practitioner.surname}" %>
+</:item>
+<:item title="Posology"><%= @medication_request.posology %></:item>
+</.list>
+
+<.back navigate={~p"/medication_requests"}>Back to medication_requests</.back>

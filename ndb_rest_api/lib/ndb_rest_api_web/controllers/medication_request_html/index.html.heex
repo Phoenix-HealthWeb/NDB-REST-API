@@ -1,0 +1,32 @@
+<.header>
+Listing Medication requests
+<:actions>
+<.link href={~p"/medication_requests/new"}>
+<.button>New Medication request</.button>
+</.link>
+</:actions>
+</.header>
+
+<.table id="medication_requests" rows={@medication_requests} row_click={&JS.navigate(~p"/medication_requests/#{&1}")}>
+<:col :let={medication_request} label="Date time"><%= medication_request.date_time %></:col>
+                                                                                     <:col :let={medication_request} label="Expiration date"><%= medication_request.expiration_date %></:col>
+                                                                                                                                                                                      <:col :let={medication_request} label="Medication"><%= medication_request.medication %></:col>
+                                                                                                                                                                                                                                                                             <:col :let={medication_request} label="Patient">
+                                                                                                                                                                                                                                                                             <%= "#{medication_request.patient.firstname} #{medication_request.patient.lastname}" %>
+</:col>
+<:col :let={medication_request} label="Practitioner">
+<%= "#{medication_request.practitioner.forename} #{medication_request.practitioner.surname}" %>
+</:col>
+<:col :let={medication_request} label="Posology"><%= medication_request.posology %></:col>
+  <:action :let={medication_request}>
+    <div class="sr-only">
+      <.link navigate={~p"/medication_requests/#{medication_request}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/medication_requests/#{medication_request}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={medication_request}>
+    <.link href={~p"/medication_requests/#{medication_request}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

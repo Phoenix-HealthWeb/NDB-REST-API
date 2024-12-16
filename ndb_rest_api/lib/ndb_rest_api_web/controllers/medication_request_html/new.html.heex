@@ -1,0 +1,8 @@
+<.header>
+  New Medication request
+  <:subtitle>Use this form to manage medication_request records in your database.</:subtitle>
+</.header>
+
+<.medication_request_form changeset={@changeset} patients={@patients} practitioners={@practitioners} action={~p"/medication_requests"} />
+
+<.back navigate={~p"/medication_requests"}>Back to medication_requests</.back>

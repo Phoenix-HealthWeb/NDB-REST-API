@@ -10,7 +10,7 @@ defmodule NdbRestApi.Practitioners.Practitioner do
     field :qualification, :string
     field :gender_id, :id
     field :role_id, :id
-
+    has_many :medication_requests, NdbRestApi.MedicationRequests.MedicationRequest
     timestamps(type: :utc_datetime)
   end
 
