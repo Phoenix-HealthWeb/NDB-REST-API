@@ -1,0 +1,22 @@
+<.header>
+Condition <%= @condition.id %>
+<:subtitle>This is a condition record from your database.</:subtitle>
+<:actions>
+<.link href={~p"/conditions/#{@condition}/edit"}>
+<.button>Edit condition</.button>
+</.link>
+</:actions>
+</.header>
+
+<.list>
+<:item title="Patient">
+<%= "#{@condition.patient.firstname} #{@condition.patient.lastname}" %>
+</:item>
+<:item title="Practitioner">
+<%= "#{@condition.practitioner.forename} #{@condition.practitioner.surname}" %>
+</:item>
+<:item title="Date time"><%= @condition.date_time %></:item>
+                                                    <:item title="Comment"><%= @condition.comment %></:item>
+</.list>
+
+<.back navigate={~p"/conditions"}>Back to conditions</.back>

@@ -33,6 +33,7 @@ defmodule NdbRestApiWeb.Router do
     resources "/hospitals", HospitalController
     resources "/practitioners", PractitionerController
     resources "/medication_requests", MedicationRequestController
+    resources "/conditions", ConditionController
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
@@ -80,6 +81,7 @@ defmodule NdbRestApiWeb.Router do
     resources "/hospitals", HospitalController
     resources "/practitioners", PractitionerController
     resources "/medication_requests", MedicationRequestController
+    resources "/conditions", ConditionController
   end
 
   scope "/", NdbRestApiWeb do

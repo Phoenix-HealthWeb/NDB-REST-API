@@ -1,0 +1,8 @@
+<.header>
+  Edit Condition <%= @condition.id %>
+<:subtitle>Use this form to manage condition records in your database.</:subtitle>
+</.header>
+
+<.condition_form changeset={@changeset} patients={@patients} practitioners={@practitioners} action={~p"/conditions/#{@condition}"} />
+
+<.back navigate={~p"/conditions"}>Back to conditions</.back>

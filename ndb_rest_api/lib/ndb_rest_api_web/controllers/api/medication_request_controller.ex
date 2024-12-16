@@ -35,7 +35,6 @@ defmodule NdbRestApiWeb.Api.MedicationRequestController do
       |> Repo.preload(:practitioner)
       |> Repo.preload(:gender)
 
-    IO.inspect(medication_request)
     render(conn, :show, medication_request: medication_request)
   end
 
