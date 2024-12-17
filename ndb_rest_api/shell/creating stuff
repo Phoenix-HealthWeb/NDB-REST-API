@@ -1,3 +1,0 @@
-mix phx.gen.html PractitionerRoles PractitionerRole practitioner_roles name:string
-
-mix phx.gen.json PractitionerRoles PractitionerRole practitioner_roles name:string --web api --no-context --no-schema
