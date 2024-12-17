@@ -1,0 +1,27 @@
+<.header>
+  Listing Practitioners
+  <:actions>
+    <.link href={~p"/practitioners/new"}>
+      <.button>New Practitioner</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="practitioners" rows={@practitioners} row_click={&JS.navigate(~p"/practitioners/#{&1}")}>
+  <:col :let={practitioner} label="Email"><%= practitioner.email %></:col>
+  <:col :let={practitioner} label="Forename"><%= practitioner.forename %></:col>
+  <:col :let={practitioner} label="Surname"><%= practitioner.surname %></:col>
+  <:col :let={practitioner} label="Date of birth"><%= practitioner.date_of_birth %></:col>
+  <:col :let={practitioner} label="Qualification"><%= practitioner.qualification %></:col>
+  <:action :let={practitioner}>
+    <div class="sr-only">
+      <.link navigate={~p"/practitioners/#{practitioner}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/practitioners/#{practitioner}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={practitioner}>
+    <.link href={~p"/practitioners/#{practitioner}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>
