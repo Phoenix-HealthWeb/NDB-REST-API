@@ -5,9 +5,11 @@ defmodule NdbRestApi.Hospitals.Hospital do
   schema "hospitals" do
     field :name, :string
     field :address, :string
-    field :api_key, :string
     field :region, :string
     field :notes, :string
+    field :api_key, :string
+
+    many_to_many :practitioners, NdbRestApi.Practitioners.Practitioner, join_through: "hospitals_practitioners"
 
     timestamps(type: :utc_datetime)
   end

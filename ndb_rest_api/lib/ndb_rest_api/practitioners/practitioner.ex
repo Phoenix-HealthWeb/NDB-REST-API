@@ -11,6 +11,8 @@ defmodule NdbRestApi.Practitioners.Practitioner do
     field :gender_id, :id
     field :role_id, :id
 
+    many_to_many :hospitals, NdbRestApi.Hospitals.Hospital, join_through: "hospitals_practitioners"
+
     timestamps(type: :utc_datetime)
   end
 
