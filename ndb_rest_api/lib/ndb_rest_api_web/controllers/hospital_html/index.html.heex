@@ -1,0 +1,27 @@
+<.header>
+  Listing Hospitals
+  <:actions>
+    <.link href={~p"/hospitals/new"}>
+      <.button>New Hospital</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="hospitals" rows={@hospitals} row_click={&JS.navigate(~p"/hospitals/#{&1}")}>
+  <:col :let={hospital} label="Name"><%= hospital.name %></:col>
+  <:col :let={hospital} label="Address"><%= hospital.address %></:col>
+  <:col :let={hospital} label="Region"><%= hospital.region %></:col>
+  <:col :let={hospital} label="Notes"><%= hospital.notes %></:col>
+  <:col :let={hospital} label="Api key"><%= hospital.api_key %></:col>
+  <:action :let={hospital}>
+    <div class="sr-only">
+      <.link navigate={~p"/hospitals/#{hospital}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/hospitals/#{hospital}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={hospital}>
+    <.link href={~p"/hospitals/#{hospital}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

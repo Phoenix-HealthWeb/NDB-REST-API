@@ -1,0 +1,8 @@
+<.header>
+  Edit Hospital <%= @hospital.id %>
+  <:subtitle>Use this form to manage hospital records in your database.</:subtitle>
+</.header>
+
+<.hospital_form changeset={@changeset} action={~p"/hospitals/#{@hospital}"} />
+
+<.back navigate={~p"/hospitals"}>Back to hospitals</.back>

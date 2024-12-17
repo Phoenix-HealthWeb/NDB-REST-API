@@ -1,0 +1,13 @@
+<.simple_form :let={f} for={@changeset} action={@action}>
+  <.error :if={@changeset.action}>
+    Oops, something went wrong! Please check the errors below.
+  </.error>
+  <.input field={f[:name]} type="text" label="Name" />
+  <.input field={f[:address]} type="text" label="Address" />
+  <.input field={f[:region]} type="text" label="Region" />
+  <.input field={f[:notes]} type="text" label="Notes" />
+  <.input field={f[:api_key]} type="text" label="Api key" />
+  <:actions>
+    <.button>Save Hospital</.button>
+  </:actions>
+</.simple_form>
