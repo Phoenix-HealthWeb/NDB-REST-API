@@ -5,6 +5,18 @@
   <.input field={f[:email]} type="text" label="Email" />
   <.input field={f[:forename]} type="text" label="Forename" />
   <.input field={f[:surname]} type="text" label="Surname" />
+  <.input 
+    field={f[:gender_id]} 
+    type="select" 
+    label="Gender"
+    options={Enum.map(@genders, &{&1.name, &1.id})}
+  />
+  <.input 
+    field={f[:role_id]} 
+    type="select" 
+    label="Role"
+    options={Enum.map(@roles, &{&1.name, &1.id})}
+  />
   <.input field={f[:date_of_birth]} type="date" label="Date of birth" />
   <.input field={f[:qualification]} type="text" label="Qualification" />
   <:actions>

@@ -8,9 +8,9 @@ defmodule NdbRestApi.Practitioners.Practitioner do
     field :surname, :string
     field :date_of_birth, :date
     field :qualification, :string
-    field :gender_id, :id
-    field :role_id, :id
 
+    belongs_to :gender, NdbRestApi.Genders.Gender
+    belongs_to :role, NdbRestApi.PractitionerRoles.PractitionerRole
     many_to_many :hospitals, NdbRestApi.Hospitals.Hospital, join_through: "hospitals_practitioners"
 
     timestamps(type: :utc_datetime)
@@ -19,8 +19,8 @@ defmodule NdbRestApi.Practitioners.Practitioner do
   @doc false
   def changeset(practitioner, attrs) do
     practitioner
-    |> cast(attrs, [:email, :forename, :surname, :date_of_birth, :qualification])
-    |> validate_required([:email, :forename, :surname, :date_of_birth, :qualification])
+    |> cast(attrs, [:email, :forename, :surname, :date_of_birth, :qualification, :gender_id, :role_id])
+    |> validate_required([:email, :forename, :surname, :date_of_birth, :qualification, :gender_id, :role_id])
     |> unique_constraint(:email)
   end
 end

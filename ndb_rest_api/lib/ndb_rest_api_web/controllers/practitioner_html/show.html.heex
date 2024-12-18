@@ -14,6 +14,8 @@
   <:item title="Surname"><%= @practitioner.surname %></:item>
   <:item title="Date of birth"><%= @practitioner.date_of_birth %></:item>
   <:item title="Qualification"><%= @practitioner.qualification %></:item>
+  <:item title="Gender"><%= @practitioner.gender.name %></:item>
+  <:item title="Role"><%= @practitioner.role.name %></:item>
 </.list>
 
 <.back navigate={~p"/practitioners"}>Back to practitioners</.back>

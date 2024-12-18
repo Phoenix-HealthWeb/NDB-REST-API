@@ -8,6 +8,8 @@ defmodule NdbRestApiWeb.PractitionerHTML do
   """
   attr :changeset, Ecto.Changeset, required: true
   attr :action, :string, required: true
+  attr :genders, :list, required: true
+  attr :roles, :list, required: true
 
   def practitioner_form(assigns)
 end

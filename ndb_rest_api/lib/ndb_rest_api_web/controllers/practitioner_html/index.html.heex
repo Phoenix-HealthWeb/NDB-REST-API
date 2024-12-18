@@ -13,6 +13,8 @@
   <:col :let={practitioner} label="Surname"><%= practitioner.surname %></:col>
   <:col :let={practitioner} label="Date of birth"><%= practitioner.date_of_birth %></:col>
   <:col :let={practitioner} label="Qualification"><%= practitioner.qualification %></:col>
+  <:col :let={practitioner} label="Gender"><%= practitioner.gender.name %></:col>
+  <:col :let={practitioner} label="Role"><%= practitioner.role.name %></:col>
   <:action :let={practitioner}>
     <div class="sr-only">
       <.link navigate={~p"/practitioners/#{practitioner}"}>Show</.link>
