@@ -15,7 +15,7 @@ defmodule NdbRestApiWeb.Api.PractitionerRoleController do
     with {:ok, %PractitionerRole{} = practitioner_role} <- PractitionerRoles.create_practitioner_role(practitioner_role_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", ~p"/api/api/practitioner_roles/#{practitioner_role}")
+      |> put_resp_header("location", ~p"/api/practitioner_roles/#{practitioner_role}")
       |> render(:show, practitioner_role: practitioner_role)
     end
   end
