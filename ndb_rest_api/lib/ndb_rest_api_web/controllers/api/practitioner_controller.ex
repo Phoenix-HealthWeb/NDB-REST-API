@@ -40,4 +40,12 @@ defmodule NdbRestApiWeb.Api.PractitionerController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  @doc """
+  Searches a specific practitioner by email.
+  """
+  def search(conn, %{"email" => email}) do
+    practitioner = Practitioners.get_practitioner_by_email(email)
+    render(conn, :show, practitioner: practitioner)
+  end
 end

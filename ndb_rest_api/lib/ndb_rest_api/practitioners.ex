@@ -101,4 +101,15 @@ defmodule NdbRestApi.Practitioners do
   def change_practitioner(%Practitioner{} = practitioner, attrs \\ %{}) do
     Practitioner.changeset(practitioner, attrs)
   end
+
+
+  @doc """
+  Gets a single practitioner by its email.
+
+  Raises `Ecto.NoResultsError` if the Practitioner does not exist.
+  """
+  def get_practitioner_by_email(email) do
+    Practitioner
+    |> Repo.get_by!(email: email)
+  end
 end

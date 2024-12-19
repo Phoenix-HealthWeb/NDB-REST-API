@@ -32,6 +32,7 @@ defmodule NdbRestApiWeb.Router do
     resources "/practitioner_roles", PractitionerRoleController
     resources "/hospitals", HospitalController
     resources "/practitioners", PractitionerController
+    get "/practitioners/search/:email", PractitionerController, :search
     resources "/medication_requests", MedicationRequestController
     resources "/conditions", ConditionController
     resources "/observations", ObservationController
