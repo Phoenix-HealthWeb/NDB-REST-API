@@ -22,9 +22,10 @@ defmodule NdbRestApi.Hospitals.Hospital do
     |> put_assoc(:practitioners, get_practitioners(attrs))
   end
 
-  defp get_practitioners(%{"practitioner_id" => practitioner_id}) when practitioner_id != "" do
-    NdbRestApi.Practitioners.get_practitioner!(practitioner_id)
-    |> List.wrap()
+  defp get_practitioners(%{"practitioner_ids" => practitioner_ids}) when is_list(practitioner_ids) do
+    practitioner_ids
+    |> Enum.reject(&(&1 == ""))
+    |> Enum.map(&NdbRestApi.Practitioners.get_practitioner!/1)
   end
   defp get_practitioners(_), do: []
 end
