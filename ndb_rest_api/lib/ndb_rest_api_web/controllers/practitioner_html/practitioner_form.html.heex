@@ -19,9 +19,10 @@
     options={Enum.map(@roles, &{&1.name, &1.id})}
   />
   <.input 
-    field={f[:hospital_id]} 
+    field={f[:hospital_ids]} 
     type="select" 
-    label="Hospital"
+    multiple
+    label="Hospitals"
     options={Enum.map(@hospitals, &{&1.name, &1.id})}
   />
   <.input field={f[:date_of_birth]} type="date" label="Date of birth" />
