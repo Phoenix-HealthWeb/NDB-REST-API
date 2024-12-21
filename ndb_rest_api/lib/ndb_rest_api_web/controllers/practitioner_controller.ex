@@ -39,7 +39,6 @@ defmodule NdbRestApiWeb.PractitionerController do
 
   def show(conn, %{"id" => id}) do
     practitioner = Practitioners.get_practitioner!(id) |> Repo.preload([:gender, :role, :hospitals])
-    hospitals = practitioner.hospitals
     render(conn, :show, practitioner: practitioner)
   end
 
