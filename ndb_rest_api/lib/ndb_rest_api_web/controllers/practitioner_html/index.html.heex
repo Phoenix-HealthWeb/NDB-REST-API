@@ -15,6 +15,11 @@
   <:col :let={practitioner} label="Qualification"><%= practitioner.qualification %></:col>
   <:col :let={practitioner} label="Gender"><%= practitioner.gender.name %></:col>
   <:col :let={practitioner} label="Role"><%= practitioner.role.name %></:col>
+  <:col :let={practitioner} label="Hospitals">
+    <%= for hospital <- practitioner.hospitals do %>
+      <div><%= hospital.name %></div>
+    <% end %>
+  </:col>
   <:action :let={practitioner}>
     <div class="sr-only">
       <.link navigate={~p"/practitioners/#{practitioner}"}>Show</.link>

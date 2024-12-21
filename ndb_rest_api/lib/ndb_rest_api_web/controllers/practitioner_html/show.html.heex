@@ -16,6 +16,11 @@
   <:item title="Qualification"><%= @practitioner.qualification %></:item>
   <:item title="Gender"><%= @practitioner.gender.name %></:item>
   <:item title="Role"><%= @practitioner.role.name %></:item>
+  <:item title="Hospitals">
+    <%= for hospital <- @practitioner.hospitals do %>
+      <div><%= hospital.name %></div>
+    <% end %>
+  </:item>
 </.list>
 
 <.back navigate={~p"/practitioners"}>Back to practitioners</.back>

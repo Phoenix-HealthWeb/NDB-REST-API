@@ -11,7 +11,7 @@ defmodule NdbRestApi.Practitioners.Practitioner do
 
     belongs_to :gender, NdbRestApi.Genders.Gender
     belongs_to :role, NdbRestApi.PractitionerRoles.PractitionerRole
-    many_to_many :hospitals, NdbRestApi.Hospitals.Hospital, join_through: "hospitals_practitioners"
+    many_to_many :hospitals, NdbRestApi.Hospitals.Hospital, join_through: "hospitals_practitioners", on_replace: :delete
 
     timestamps(type: :utc_datetime)
   end
@@ -50,5 +50,12 @@ defmodule NdbRestApi.Practitioners.Practitioner do
     |> cast(attrs, [:email, :forename, :surname, :date_of_birth, :qualification, :gender_id, :role_id])
     |> validate_required([:email, :forename, :surname, :date_of_birth, :qualification, :gender_id, :role_id])
     |> unique_constraint(:email)
+    |> put_assoc(:hospitals, get_hospitals(attrs))
   end
+
+  defp get_hospitals(%{"hospital_id" => hospital_id}) when hospital_id != "" do
+    NdbRestApi.Hospitals.get_hospital!(hospital_id)
+    |> List.wrap()
+  end
+  defp get_hospitals(_), do: []
 end
