@@ -49,3 +49,8 @@ In `hospital_controller.ex` every time you run `Hospitals.list_hospitals()` you 
 2. update the list hospital by adding `|> Repo.preload(:practitioners)`
 
 Do a similar thing also for `practitioner_controller.ex`
+
+## NEW METHOD
+```sh
+mix phx.gen.schema HospitalsPractitioners hospitals_practitioners
+```
