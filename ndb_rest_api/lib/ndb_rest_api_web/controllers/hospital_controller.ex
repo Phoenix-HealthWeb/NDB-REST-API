@@ -12,7 +12,7 @@ defmodule NdbRestApiWeb.HospitalController do
   end
 
   def new(conn, _params) do
-    changeset = Hospitals.change_hospital(%Hospital{})
+    changeset = Hospitals.change_hospital(%Hospital{practitioners: []})
     practitioners = Practitioners.list_practitioners()
     render(conn, :new, changeset: changeset, practitioners: practitioners)
   end
@@ -20,6 +20,7 @@ defmodule NdbRestApiWeb.HospitalController do
   def create(conn, %{"hospital" => hospital_params}) do
     case Hospitals.create_hospital(hospital_params) do
       {:ok, hospital} ->
+        hospital = Repo.preload(hospital, :practitioners)
         conn
         |> put_flash(:info, "Hospital created successfully.")
         |> redirect(to: ~p"/hospitals/#{hospital}")
@@ -58,7 +59,7 @@ defmodule NdbRestApiWeb.HospitalController do
   end
 
   def delete(conn, %{"id" => id}) do
-    hospital = Hospitals.get_hospital!(id)
+    hospital = Hospitals.get_hospital!(id) |> Repo.preload(:practitioners)
     {:ok, _hospital} = Hospitals.delete_hospital(hospital)
 
     conn
