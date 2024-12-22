@@ -22,6 +22,13 @@ defmodule NdbRestApi.MedicationRequests do
   end
 
   @doc """
+  Returns the list of medication_requests by patient_id.
+  """
+  def list_medication_requests_by_patient_id(patient_id) do
+    Repo.all(from(m in MedicationRequest, where: m.patient_id == ^patient_id))
+  end
+
+  @doc """
   Gets a single medication_request.
 
   Raises `Ecto.NoResultsError` if the Medication request does not exist.

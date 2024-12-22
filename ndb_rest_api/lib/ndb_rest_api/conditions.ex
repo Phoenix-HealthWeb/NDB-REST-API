@@ -22,6 +22,13 @@ defmodule NdbRestApi.Conditions do
   end
 
   @doc """
+  Returns the list of conditions by patient_id.
+  """
+  def list_conditions_by_patient_id(patient_id) do
+    Repo.all(from(c in Condition, where: c.patient_id == ^patient_id))
+  end
+
+  @doc """
   Gets a single condition.
 
   Raises `Ecto.NoResultsError` if the Condition does not exist.

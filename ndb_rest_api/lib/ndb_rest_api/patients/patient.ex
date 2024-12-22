@@ -10,6 +10,8 @@ defmodule NdbRestApi.Patients.Patient do
     # field :gender_id, :id
     belongs_to :gender, NdbRestApi.Genders.Gender
     has_many :medication_requests, NdbRestApi.MedicationRequests.MedicationRequest
+    has_many :observations, NdbRestApi.Observations.Observation
+    has_many :conditions, NdbRestApi.Conditions.Condition
     timestamps(type: :utc_datetime)
   end
 

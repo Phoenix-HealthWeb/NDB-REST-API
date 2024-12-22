@@ -8,8 +8,10 @@ defmodule NdbRestApiWeb.Api.PatientController do
   action_fallback NdbRestApiWeb.FallbackController
 
   def index(conn, _params) do
-    patients = Patients.list_patients() |> Repo.preload(:gender)
-    IO.inspect(patients)
+    patients =
+      Patients.list_patients()
+      |> Repo.preload([:gender, :medication_requests, :observations, :conditions])
+
     render(conn, :index, patients: patients)
   end
 
@@ -23,7 +25,10 @@ defmodule NdbRestApiWeb.Api.PatientController do
   end
 
   def show(conn, %{"id" => id}) do
-    patient = Patients.get_patient!(id) |> Repo.preload(:gender)
+    patient =
+      Patients.get_patient!(id)
+      |> Repo.preload([:gender, :medication_requests, :observations, :conditions])
+
     render(conn, :show, patient: patient)
   end
 

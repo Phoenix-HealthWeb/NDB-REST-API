@@ -22,6 +22,13 @@ defmodule NdbRestApi.Observations do
   end
 
   @doc """
+  Returns the list of observations by patient_id.
+  """
+  def list_observations_by_patient_id(patient_id) do
+    Repo.all(from(o in Observation, where: o.patient_id == ^patient_id))
+  end
+
+  @doc """
   Gets a single observation.
 
   Raises `Ecto.NoResultsError` if the Observation does not exist.
