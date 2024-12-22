@@ -3,9 +3,27 @@ defmodule NdbRestApiWeb.PractitionerControllerTest do
 
   import NdbRestApi.PractitionersFixtures
 
-  @create_attrs %{email: "some email", forename: "some forename", surname: "some surname", date_of_birth: ~D[2024-12-12], qualification: "some qualification"}
-  @update_attrs %{email: "some updated email", forename: "some updated forename", surname: "some updated surname", date_of_birth: ~D[2024-12-13], qualification: "some updated qualification"}
-  @invalid_attrs %{email: nil, forename: nil, surname: nil, date_of_birth: nil, qualification: nil}
+  @create_attrs %{
+    email: "some email",
+    forename: "some forename",
+    surname: "some surname",
+    date_of_birth: ~D[2024-12-16],
+    qualification: "some qualification"
+  }
+  @update_attrs %{
+    email: "some updated email",
+    forename: "some updated forename",
+    surname: "some updated surname",
+    date_of_birth: ~D[2024-12-17],
+    qualification: "some updated qualification"
+  }
+  @invalid_attrs %{
+    email: nil,
+    forename: nil,
+    surname: nil,
+    date_of_birth: nil,
+    qualification: nil
+  }
 
   describe "index" do
     test "lists all practitioners", %{conn: conn} do

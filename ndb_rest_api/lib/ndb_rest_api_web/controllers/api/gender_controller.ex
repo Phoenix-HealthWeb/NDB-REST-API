@@ -15,7 +15,7 @@ defmodule NdbRestApiWeb.Api.GenderController do
     with {:ok, %Gender{} = gender} <- Genders.create_gender(gender_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", ~p"/api/api/genders/#{gender}")
+      |> put_resp_header("location", ~p"/api/genders/#{gender}")
       |> render(:show, gender: gender)
     end
   end

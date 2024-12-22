@@ -3,42 +3,49 @@ defmodule NdbRestApiWeb.HospitalController do
 
   alias NdbRestApi.Hospitals
   alias NdbRestApi.Hospitals.Hospital
+  alias NdbRestApi.Practitioners
+  alias NdbRestApi.Repo
 
   def index(conn, _params) do
-    hospitals = Hospitals.list_hospitals()
+    hospitals = Hospitals.list_hospitals() |> Repo.preload(:practitioners)
     render(conn, :index, hospitals: hospitals)
   end
 
   def new(conn, _params) do
-    changeset = Hospitals.change_hospital(%Hospital{})
-    render(conn, :new, changeset: changeset)
+    changeset = Hospitals.change_hospital(%Hospital{practitioners: []})
+    practitioners = Practitioners.list_practitioners()
+    render(conn, :new, changeset: changeset, practitioners: practitioners)
   end
 
   def create(conn, %{"hospital" => hospital_params}) do
     case Hospitals.create_hospital(hospital_params) do
       {:ok, hospital} ->
+        hospital = Repo.preload(hospital, :practitioners)
+
         conn
         |> put_flash(:info, "Hospital created successfully.")
         |> redirect(to: ~p"/hospitals/#{hospital}")
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, :new, changeset: changeset)
+        practitioners = Practitioners.list_practitioners()
+        render(conn, :new, changeset: changeset, practitioners: practitioners)
     end
   end
 
   def show(conn, %{"id" => id}) do
-    hospital = Hospitals.get_hospital!(id)
+    hospital = Hospitals.get_hospital!(id) |> Repo.preload(:practitioners)
     render(conn, :show, hospital: hospital)
   end
 
   def edit(conn, %{"id" => id}) do
-    hospital = Hospitals.get_hospital!(id)
+    hospital = Hospitals.get_hospital!(id) |> Repo.preload(:practitioners)
     changeset = Hospitals.change_hospital(hospital)
-    render(conn, :edit, hospital: hospital, changeset: changeset)
+    practitioners = Practitioners.list_practitioners()
+    render(conn, :edit, hospital: hospital, changeset: changeset, practitioners: practitioners)
   end
 
   def update(conn, %{"id" => id, "hospital" => hospital_params}) do
-    hospital = Hospitals.get_hospital!(id)
+    hospital = Hospitals.get_hospital!(id) |> Repo.preload(:practitioners)
 
     case Hospitals.update_hospital(hospital, hospital_params) do
       {:ok, hospital} ->
@@ -47,12 +54,18 @@ defmodule NdbRestApiWeb.HospitalController do
         |> redirect(to: ~p"/hospitals/#{hospital}")
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, :edit, hospital: hospital, changeset: changeset)
+        practitioners = Practitioners.list_practitioners()
+
+        render(conn, :edit,
+          hospital: hospital,
+          changeset: changeset,
+          practitioners: practitioners
+        )
     end
   end
 
   def delete(conn, %{"id" => id}) do
-    hospital = Hospitals.get_hospital!(id)
+    hospital = Hospitals.get_hospital!(id) |> Repo.preload(:practitioners)
     {:ok, _hospital} = Hospitals.delete_hospital(hospital)
 
     conn

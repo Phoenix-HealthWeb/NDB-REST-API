@@ -15,7 +15,7 @@ defmodule NdbRestApiWeb.Api.HospitalController do
     with {:ok, %Hospital{} = hospital} <- Hospitals.create_hospital(hospital_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", ~p"/api/api/hospitals/#{hospital}")
+      |> put_resp_header("location", ~p"/api/hospitals/#{hospital}")
       |> render(:show, hospital: hospital)
     end
   end

@@ -8,6 +8,7 @@ defmodule NdbRestApiWeb.HospitalHTML do
   """
   attr :changeset, Ecto.Changeset, required: true
   attr :action, :string, required: true
+  attr :practitioners, :list, required: true
 
   def hospital_form(assigns)
 end

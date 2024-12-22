@@ -3,7 +3,6 @@ defmodule NdbRestApiWeb.Api.PatientController do
 
   alias NdbRestApi.Patients
   alias NdbRestApi.Patients.Patient
-  alias NdbRestApi.Genders
   alias NdbRestApi.Repo
 
   action_fallback NdbRestApiWeb.FallbackController
@@ -18,7 +17,7 @@ defmodule NdbRestApiWeb.Api.PatientController do
     with {:ok, %Patient{} = patient} <- Patients.create_patient(patient_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", ~p"/api/api/patients/#{patient}")
+      |> put_resp_header("location", ~p"/api/patients/#{patient}")
       |> render(:show, patient: patient)
     end
   end

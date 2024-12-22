@@ -3,6 +3,6 @@
   <:subtitle>Use this form to manage practitioner records in your database.</:subtitle>
 </.header>
 
-<.practitioner_form changeset={@changeset} action={~p"/practitioners"} />
+<.practitioner_form changeset={@changeset} genders={@genders} roles={@roles} hospitals={@hospitals} action={~p"/practitioners"} />
 
 <.back navigate={~p"/practitioners"}>Back to practitioners</.back>

@@ -14,6 +14,13 @@
   <:item title="Region"><%= @hospital.region %></:item>
   <:item title="Notes"><%= @hospital.notes %></:item>
   <:item title="Api key"><%= @hospital.api_key %></:item>
+  <:item title="Practitioners">
+    <.table id="practitioners" rows={@hospital.practitioners}>
+      <:col :let={practitioner} label="Email"><%= practitioner.email %></:col>
+      <:col :let={practitioner} label="First Name"><%= practitioner.forename %></:col>
+      <:col :let={practitioner} label="Last Name"><%= practitioner.surname %></:col>
+    </.table>
+  </:item>
 </.list>
 
 <.back navigate={~p"/hospitals"}>Back to hospitals</.back>

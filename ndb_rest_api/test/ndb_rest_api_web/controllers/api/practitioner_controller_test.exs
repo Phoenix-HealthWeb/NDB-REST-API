@@ -9,17 +9,23 @@ defmodule NdbRestApiWeb.Api.PractitionerControllerTest do
     email: "some email",
     forename: "some forename",
     surname: "some surname",
-    date_of_birth: ~D[2024-12-12],
+    date_of_birth: ~D[2024-12-16],
     qualification: "some qualification"
   }
   @update_attrs %{
     email: "some updated email",
     forename: "some updated forename",
     surname: "some updated surname",
-    date_of_birth: ~D[2024-12-13],
+    date_of_birth: ~D[2024-12-17],
     qualification: "some updated qualification"
   }
-  @invalid_attrs %{email: nil, forename: nil, surname: nil, date_of_birth: nil, qualification: nil}
+  @invalid_attrs %{
+    email: nil,
+    forename: nil,
+    surname: nil,
+    date_of_birth: nil,
+    qualification: nil
+  }
 
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
@@ -41,7 +47,7 @@ defmodule NdbRestApiWeb.Api.PractitionerControllerTest do
 
       assert %{
                "id" => ^id,
-               "date_of_birth" => "2024-12-12",
+               "date_of_birth" => "2024-12-16",
                "email" => "some email",
                "forename" => "some forename",
                "qualification" => "some qualification",
@@ -58,7 +64,10 @@ defmodule NdbRestApiWeb.Api.PractitionerControllerTest do
   describe "update practitioner" do
     setup [:create_practitioner]
 
-    test "renders practitioner when data is valid", %{conn: conn, practitioner: %Practitioner{id: id} = practitioner} do
+    test "renders practitioner when data is valid", %{
+      conn: conn,
+      practitioner: %Practitioner{id: id} = practitioner
+    } do
       conn = put(conn, ~p"/api/api/practitioners/#{practitioner}", practitioner: @update_attrs)
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
@@ -66,7 +75,7 @@ defmodule NdbRestApiWeb.Api.PractitionerControllerTest do
 
       assert %{
                "id" => ^id,
-               "date_of_birth" => "2024-12-13",
+               "date_of_birth" => "2024-12-17",
                "email" => "some updated email",
                "forename" => "some updated forename",
                "qualification" => "some updated qualification",

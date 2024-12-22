@@ -16,7 +16,7 @@ defmodule NdbRestApi.PractitionersFixtures do
     {:ok, practitioner} =
       attrs
       |> Enum.into(%{
-        date_of_birth: ~D[2024-12-12],
+        date_of_birth: ~D[2024-12-16],
         email: unique_practitioner_email(),
         forename: "some forename",
         qualification: "some qualification",

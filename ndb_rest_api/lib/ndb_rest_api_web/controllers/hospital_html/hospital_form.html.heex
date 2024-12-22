@@ -6,6 +6,13 @@
   <.input field={f[:address]} type="text" label="Address" />
   <.input field={f[:region]} type="text" label="Region" />
   <.input field={f[:notes]} type="text" label="Notes" />
+  <.input 
+    field={f[:practitioner_ids]} 
+    type="select" 
+    label="Practitioners"
+    multiple
+    options={Enum.map(@practitioners, &{&1.email, &1.id})}
+  />
   <.input field={f[:api_key]} type="text" label="Api key" />
   <:actions>
     <.button>Save Hospital</.button>

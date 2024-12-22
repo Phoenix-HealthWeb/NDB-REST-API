@@ -102,7 +102,6 @@ defmodule NdbRestApi.Practitioners do
     Practitioner.changeset(practitioner, attrs)
   end
 
-
   @doc """
   Gets a single practitioner by its email.
 
