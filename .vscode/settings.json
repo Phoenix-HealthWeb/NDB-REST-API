@@ -1,3 +1,9 @@
 {
-    "elixirLS.projectDir": "ndb_rest_api"
+    "elixirLS.projectDir": "ndb_rest_api",
+    "cSpell.words": [
+        "firstname",
+        "lastname",
+        "Scarlett",
+        "Zoey"
+    ]
 }
