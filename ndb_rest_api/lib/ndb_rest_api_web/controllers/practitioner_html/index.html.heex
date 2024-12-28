@@ -11,6 +11,7 @@
   <:col :let={practitioner} label="Email"><%= practitioner.email %></:col>
   <:col :let={practitioner} label="Forename"><%= practitioner.forename %></:col>
   <:col :let={practitioner} label="Surname"><%= practitioner.surname %></:col>
+  <:col :let={practitioner} label="Role"><%= practitioner.role.name %></:col>
   <:action :let={practitioner}>
     <div class="sr-only">
       <.link navigate={~p"/practitioners/#{practitioner}"}>Show</.link>
