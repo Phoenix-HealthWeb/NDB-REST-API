@@ -7,6 +7,8 @@ defmodule NdbRestApiWeb.MedicationRequestHTML do
   Renders a medication_request form.
   """
   attr :changeset, Ecto.Changeset, required: true
+  attr :patients, :list, required: true
+  attr :practitioners, :list, required: true
   attr :action, :string, required: true
 
   def medication_request_form(assigns)
