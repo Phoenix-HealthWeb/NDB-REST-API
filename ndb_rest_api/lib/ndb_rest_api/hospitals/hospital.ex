@@ -20,7 +20,7 @@ defmodule NdbRestApi.Hospitals.Hospital do
   def changeset(hospital, attrs) do
     hospital
     |> cast(attrs, [:name, :address, :region, :notes, :api_key])
-    |> validate_required([:name, :address, :region, :notes, :api_key])
+    |> validate_required([:name, :address, :region, :notes])
     |> put_assoc(:practitioners, get_practitioners(attrs))
   end
 
