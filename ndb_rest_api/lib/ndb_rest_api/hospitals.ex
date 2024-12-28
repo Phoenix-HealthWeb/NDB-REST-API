@@ -18,7 +18,8 @@ defmodule NdbRestApi.Hospitals do
 
   """
   def list_hospitals do
-    Repo.all(Hospital)
+    from(h in Hospital, order_by: [asc: :name])
+    |> Repo.all()
   end
 
   @doc """

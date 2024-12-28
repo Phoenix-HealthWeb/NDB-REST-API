@@ -4,7 +4,7 @@
 </.header>
   <%= @api_key %>
 <.simple_form :let={f} for={@changeset} action={~p"/hospitals/#{@hospital.id}/save_api_key"} method="post">
-  <input type="hidden" name="api_key" value={f[:api_key].value} />
+  <input type="hidden" name="hospital[api_key]" value={f[:api_key].value} />
   <.button>Save API Key</.button>
 </.simple_form>
 
