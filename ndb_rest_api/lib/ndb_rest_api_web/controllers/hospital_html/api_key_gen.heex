@@ -2,10 +2,9 @@
   Hospital <%= @hospital.id %>
   <:subtitle>You are trying to modify the api key of: <%= @hospital.name %></:subtitle>
 </.header>
-  <%= @api_key %>
-<.simple_form :let={f} for={@changeset} action={~p"/hospitals/#{@hospital.id}/handle_api_key"} method="post">
-  <input type="hidden" name="hospital[api_key]" value={f[:api_key].value} />
-  <.button>Save API Key</.button>
-</.simple_form>
-
+<.list>
+  <:item title="Name"><%= @hospital.name %></:item>
+  <:item title="Api Key"><%= @hospital.api_key_not_confirmed %></:item>
+</.list>
+<.link navigate={~p"/hospitals/#{@hospital.id}/save_api_key"}>Save API Key</.link>
 <.back navigate={~p"/hospitals"}>Back to hospitals</.back>

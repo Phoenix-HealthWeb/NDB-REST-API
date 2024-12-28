@@ -8,6 +8,7 @@ defmodule NdbRestApi.Hospitals.Hospital do
     field :region, :string
     field :notes, :string
     field :api_key, :string
+    field :api_key_not_confirmed, :string
 
     many_to_many :practitioners, NdbRestApi.Practitioners.Practitioner,
       join_through: "hospitals_practitioners",
@@ -19,8 +20,8 @@ defmodule NdbRestApi.Hospitals.Hospital do
   @doc false
   def changeset(hospital, attrs) do
     hospital
-    |> cast(attrs, [:name, :address, :region, :notes, :api_key])
-    |> validate_required([:name, :address, :region, :notes])
+    |> cast(attrs, [:name, :address, :region, :notes, :api_key, :api_key_not_confirmed])
+    |> validate_required([:name, :address, :region])
     |> put_assoc(:practitioners, get_practitioners(attrs))
     |> hash_api_key()
   end
