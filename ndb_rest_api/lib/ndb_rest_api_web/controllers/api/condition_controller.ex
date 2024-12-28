@@ -4,8 +4,6 @@ defmodule NdbRestApiWeb.Api.ConditionController do
   alias NdbRestApi.Conditions
   alias NdbRestApi.Conditions.Condition
   alias NdbRestApi.Repo
-  alias NdbRestApi.Patients
-  alias NdbRestApi.Practitioners
 
   action_fallback NdbRestApiWeb.FallbackController
 
@@ -22,7 +20,7 @@ defmodule NdbRestApiWeb.Api.ConditionController do
     with {:ok, %Condition{} = condition} <- Conditions.create_condition(condition_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", ~p"/api/api/conditions/#{condition}")
+      |> put_resp_header("location", ~p"/api/conditions/#{condition}")
       |> render(:show, condition: condition)
     end
   end

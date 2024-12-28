@@ -4,8 +4,6 @@ defmodule NdbRestApiWeb.Api.ObservationController do
   alias NdbRestApi.Observations
   alias NdbRestApi.Observations.Observation
   alias NdbRestApi.Repo
-  alias NdbRestApi.Patients
-  alias NdbRestApi.Practitioners
 
   action_fallback NdbRestApiWeb.FallbackController
 
@@ -23,7 +21,7 @@ defmodule NdbRestApiWeb.Api.ObservationController do
            Observations.create_observation(observation_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", ~p"/api/api/observations/#{observation}")
+      |> put_resp_header("location", ~p"/api/observations/#{observation}")
       |> render(:show, observation: observation)
     end
   end

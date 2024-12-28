@@ -4,8 +4,6 @@ defmodule NdbRestApiWeb.Api.MedicationRequestController do
   alias NdbRestApi.MedicationRequests
   alias NdbRestApi.MedicationRequests.MedicationRequest
   alias NdbRestApi.Repo
-  alias NdbRestApi.Patients
-  alias NdbRestApi.Practitioners
 
   action_fallback NdbRestApiWeb.FallbackController
 
@@ -23,7 +21,7 @@ defmodule NdbRestApiWeb.Api.MedicationRequestController do
            MedicationRequests.create_medication_request(medication_request_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", ~p"/api/api/medication_requests/#{medication_request}")
+      |> put_resp_header("location", ~p"/api/medication_requests/#{medication_request}")
       |> render(:show, medication_request: medication_request)
     end
   end
