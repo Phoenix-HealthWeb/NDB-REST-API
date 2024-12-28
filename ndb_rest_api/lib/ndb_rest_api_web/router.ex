@@ -81,8 +81,8 @@ defmodule NdbRestApiWeb.Router do
     resources "/patients", PatientController
     resources "/practitioner_roles", PractitionerRoleController
     resources "/hospitals", HospitalController
-    get "/hospitals/:id/api_key_gen", HospitalController, :api_key_gen
-    post "/hospitals/:id/save_api_key", HospitalController, :save_api_key
+    get "/hospitals/:id/handle_api_key", HospitalController, :handle_api_key
+    post "/hospitals/:id/handle_api_key", HospitalController, :handle_api_key
     resources "/practitioners", PractitionerController
     resources "/medication_requests", MedicationRequestController
     resources "/conditions", ConditionController
