@@ -101,4 +101,8 @@ defmodule NdbRestApi.Hospitals do
   def change_hospital(%Hospital{} = hospital, attrs \\ %{}) do
     Hospital.changeset(hospital, attrs)
   end
+
+  def generate_api_key do
+    :crypto.strong_rand_bytes(32) |> Base.encode64
+  end
 end

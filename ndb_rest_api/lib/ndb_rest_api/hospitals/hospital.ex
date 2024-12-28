@@ -22,6 +22,14 @@ defmodule NdbRestApi.Hospitals.Hospital do
     |> cast(attrs, [:name, :address, :region, :notes, :api_key])
     |> validate_required([:name, :address, :region, :notes])
     |> put_assoc(:practitioners, get_practitioners(attrs))
+    |> hash_api_key()
+  end
+
+  defp hash_api_key(changeset) do
+    case get_change(changeset, :api_key) do
+      nil -> changeset
+      api_key -> put_change(changeset, :api_key, Bcrypt.hash_pwd_salt(api_key))
+    end
   end
 
   defp get_practitioners(%{"practitioner_ids" => practitioner_ids})

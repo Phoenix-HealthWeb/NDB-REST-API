@@ -1,0 +1,11 @@
+<.header>
+  Hospital <%= @hospital.id %>
+  <:subtitle>You are trying to modify the api key of: <%= @hospital.name %></:subtitle>
+</.header>
+  <%= @api_key %>
+<.simple_form :let={f} for={@changeset} action={~p"/hospitals/#{@hospital.id}/save_api_key"} method="post">
+  <input type="hidden" name="api_key" value={f[:api_key].value} />
+  <.button>Save API Key</.button>
+</.simple_form>
+
+<.back navigate={~p"/hospitals"}>Back to hospitals</.back>

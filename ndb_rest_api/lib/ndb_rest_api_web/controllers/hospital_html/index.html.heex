@@ -21,4 +21,7 @@
       Delete
     </.link>
   </:action>
+  <:action :let={hospital}>
+    <.link navigate={~p"/hospitals/#{hospital}/api_key_gen"}>Generate Key</.link>
+  </:action>
 </.table>

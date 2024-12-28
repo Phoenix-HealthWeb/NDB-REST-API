@@ -72,4 +72,24 @@ defmodule NdbRestApiWeb.HospitalController do
     |> put_flash(:info, "Hospital deleted successfully.")
     |> redirect(to: ~p"/hospitals")
   end
+
+  def api_key_gen(conn, %{"id" => id}) do
+    hospital = Hospitals.get_hospital!(id) |> Repo.preload(:practitioners)
+    api_key = Hospitals.generate_api_key()
+    changeset = Hospitals.change_hospital(hospital, %{api_key: api_key})
+    render(conn, :api_key_gen, hospital: hospital, api_key: api_key, changeset: changeset)
+  end
+
+  def save_api_key(conn, %{"id" => id, "hospital" => %{"api_key" => api_key}}) do
+    hospital = Hospitals.get_hospital!(id) |> Repo.preload(:practitioners)
+
+    case Hospitals.update_hospital(hospital, %{api_key: api_key}) do
+      {:ok, _hospital} ->
+        conn
+        |> put_flash(:info, "API key saved successfully.")
+        |> redirect(to: ~p"/hospitals")
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, :api_key_gen, hospital: hospital, api_key: api_key, changeset: changeset)
+    end
+  end
 end
