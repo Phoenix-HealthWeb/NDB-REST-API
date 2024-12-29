@@ -17,7 +17,7 @@ defmodule NdbRestApiWeb.CoreComponents do
   use Phoenix.Component
 
   alias Phoenix.LiveView.JS
-  import NdbRestApiWeb.Gettext
+  use Gettext, backend: NdbRestApiWeb.Gettext
 
   @doc """
   Renders a modal.
