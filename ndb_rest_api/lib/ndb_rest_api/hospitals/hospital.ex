@@ -1,6 +1,7 @@
 defmodule NdbRestApi.Hospitals.Hospital do
   use Ecto.Schema
   import Ecto.Changeset
+  import Ecto.Query
 
   schema "hospitals" do
     field :name, :string
@@ -33,12 +34,8 @@ defmodule NdbRestApi.Hospitals.Hospital do
     end
   end
 
-  defp get_practitioners(%{"practitioner_ids" => practitioner_ids})
-       when is_list(practitioner_ids) do
-    practitioner_ids
-    |> Enum.reject(&(&1 == ""))
-    |> Enum.map(&NdbRestApi.Practitioners.get_practitioner!/1)
+  defp get_practitioners(attrs) do
+    practitioner_ids = Map.get(attrs, "practitioner_ids", [])
+    NdbRestApi.Repo.all(from p in NdbRestApi.Practitioners.Practitioner, where: p.id in ^practitioner_ids)
   end
-
-  defp get_practitioners(_), do: []
 end

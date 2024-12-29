@@ -1,4 +1,4 @@
-<.simple_form :let={f} for={@changeset} action={@action}>
+<.simple_form :let={f} for={@changeset} action={@action} method={if @changeset.data.id, do: "put", else: "post"}>
   <.error :if={@changeset.action}>
     Oops, something went wrong! Please check the errors below.
   </.error>
@@ -13,6 +13,9 @@
     multiple
     options={Enum.map(@practitioners, &{&1.email, &1.id})}
   />
+  <%= for practitioner <- @changeset.data.practitioners do %>
+    <input type="hidden" name="hospital[practitioner_ids][]" value={practitioner.id}>
+  <% end %>
   <:actions>
     <.button>Save Hospital</.button>
   </:actions>
