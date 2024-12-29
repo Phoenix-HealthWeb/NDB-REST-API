@@ -9,12 +9,8 @@
 </.list>
 
 <.form for={@changeset} action={~p"/hospitals/#{@hospital.id}/api_key"} method="post">
-  <%!-- <div>
-    <label for="api_key">New API Key</label>
-    <input type="text" name="hospital[api_key]" id="api_key" value={@changeset.data.api_key"/>
-  </div> --%>
   <div>
-    <button type="submit">Save API Key</button>
+    <.button class="mt-10" type="submit">Save API Key</.button>
   </div>
 </.form>
 
