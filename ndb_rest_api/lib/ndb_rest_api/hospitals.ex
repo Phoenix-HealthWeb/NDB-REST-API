@@ -104,13 +104,32 @@ defmodule NdbRestApi.Hospitals do
   end
 
   def generate_api_key do
-    :crypto.strong_rand_bytes(32) |> Base.encode64
+    :crypto.strong_rand_bytes(32) |> Base.encode64()
   end
 
   def check_api_key(%Hospital{} = hospital, api_key) do
     case Bcrypt.verify_pass(api_key, hospital.api_key) do
       true -> {:ok, hospital}
       false -> {:error, :unauthorized}
+    end
+  end
+
+  def update_hospital_api_key(%Hospital{} = hospital, attrs) do
+    now = DateTime.utc_now() |> DateTime.truncate(:second)
+
+    result =
+      from(h in Hospital, where: h.id == ^hospital.id)
+      |> Repo.update_all(
+        set: [
+          api_key: Bcrypt.hash_pwd_salt(attrs.api_key),
+          api_key_not_confirmed: attrs.api_key_not_confirmed,
+          updated_at: now
+        ]
+      )
+
+    case result do
+      {1, _} -> {:ok, Repo.get!(Hospital, hospital.id) |> Repo.preload(:practitioners)}
+      _ -> {:error, "Failed to update API key"}
     end
   end
 end

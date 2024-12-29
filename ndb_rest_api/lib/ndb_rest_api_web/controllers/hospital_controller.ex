@@ -87,7 +87,7 @@ defmodule NdbRestApiWeb.HospitalController do
   def api_key(conn, %{"id" => id}) when conn.method == "GET" do
     hospital = Hospitals.get_hospital!(id) |> Repo.preload(:practitioners)
     api_key = Hospitals.generate_api_key()
-    changeset = Hospital.changeset(hospital, %{api_key_not_confirmed: api_key})
+    changeset = Hospital.api_key_generation_changeset(hospital, %{api_key_not_confirmed: api_key})
 
     case Repo.update(changeset) do
       {:ok, updated_hospital} ->
@@ -99,14 +99,12 @@ defmodule NdbRestApiWeb.HospitalController do
 
   def api_key(conn, %{"id" => id}) when conn.method == "POST" do
     hospital = Hospitals.get_hospital!(id) |> Repo.preload(:practitioners)
-
-    # Check if the record was modified more than 3 minutes ago
     if DateTime.diff(DateTime.utc_now(), hospital.updated_at) > 180 do
       conn
       |> put_flash(:error, "The provisional API key has expired. Please generate a new one.")
       |> redirect(to: ~p"/hospitals")
     else
-      case Hospitals.update_hospital(hospital, %{
+      case Hospitals.update_hospital_api_key(hospital, %{
              api_key: hospital.api_key_not_confirmed,
              api_key_not_confirmed: nil
            }) do
@@ -114,13 +112,10 @@ defmodule NdbRestApiWeb.HospitalController do
           conn
           |> put_flash(:info, "API key saved successfully.")
           |> redirect(to: ~p"/hospitals")
-
-        {:error, %Ecto.Changeset{} = changeset} ->
-          render(conn, :api_key_gen,
-            hospital: hospital,
-            api_key: hospital.api_key_not_confirmed,
-            changeset: changeset
-          )
+        {:error, error_message} when is_binary(error_message) ->
+          conn
+          |> put_flash(:error, error_message)
+          |> redirect(to: ~p"/hospitals")
       end
     end
   end

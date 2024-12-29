@@ -27,6 +27,19 @@ defmodule NdbRestApi.Hospitals.Hospital do
     |> hash_api_key()
   end
 
+  def api_key_changeset(hospital, attrs) do
+    hospital
+    |> cast(attrs, [:api_key, :api_key_not_confirmed])
+    |> hash_api_key()
+    |> put_assoc(:practitioners, hospital.practitioners || [])
+  end
+
+  def api_key_generation_changeset(hospital, attrs) do
+    hospital
+    |> cast(attrs, [:api_key_not_confirmed])
+    |> put_assoc(:practitioners, hospital.practitioners || [])
+  end
+
   defp hash_api_key(changeset) do
     case get_change(changeset, :api_key) do
       nil -> changeset
