@@ -106,4 +106,11 @@ defmodule NdbRestApi.Hospitals do
   def generate_api_key do
     :crypto.strong_rand_bytes(32) |> Base.encode64
   end
+
+  def check_api_key(%Hospital{} = hospital, api_key) do
+    case Bcrypt.verify_pass(api_key, hospital.api_key) do
+      true -> {:ok, hospital}
+      false -> {:error, :unauthorized}
+    end
+  end
 end

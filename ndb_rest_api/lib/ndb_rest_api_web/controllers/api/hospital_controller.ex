@@ -40,4 +40,15 @@ defmodule NdbRestApiWeb.Api.HospitalController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  def check_api_key(conn, %{"id" => id, "api_key" => api_key}) do
+    hospital = Hospitals.get_hospital!(id)
+
+    case Hospitals.check_api_key(hospital, api_key) do
+      {:ok, _hospital} ->
+        json(conn, %{valid: true})
+      {:error, :unauthorized} ->
+        json(conn, %{valid: false})
+    end
+  end
 end
