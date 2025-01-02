@@ -17,6 +17,7 @@ spec:
       containers:
       - name: ndb-rest-api
         image: visco01/ndb-rest-api:main
+        imagePullPolicy: Always
         ports:
         - containerPort: 4000
         env:
