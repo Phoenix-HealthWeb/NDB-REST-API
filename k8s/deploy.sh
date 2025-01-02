@@ -26,6 +26,12 @@ fi
 
 minikube addons enable metrics-server
 
+# kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.12.0-beta.0/deploy/static/provider/cloud/deploy.yaml
+
+minikube addons enable ingress
+
+# minikube addons enable ingress-dns
+
 if kubectl get secret postgres-secret &>/dev/null; then
     echo "Secret 'postgres-secret' already exists. Skipping creation."
 else
@@ -36,3 +42,5 @@ fi
 kubectl apply -f ndb-deployment.yml
 
 kubectl apply -f ndb-rest-api-deployment.yml
+
+kubectl apply -f nginx-ingress.yml
