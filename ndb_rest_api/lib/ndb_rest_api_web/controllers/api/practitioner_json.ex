@@ -22,7 +22,9 @@ defmodule NdbRestApiWeb.Api.PractitionerJSON do
       forename: practitioner.forename,
       surname: practitioner.surname,
       date_of_birth: practitioner.date_of_birth,
-      qualification: practitioner.qualification
+      qualification: practitioner.qualification,
+      gender: practitioner.gender.name,
+      role: practitioner.role.name
     }
   end
 end

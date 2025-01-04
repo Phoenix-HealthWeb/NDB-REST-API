@@ -8,7 +8,7 @@ defmodule NdbRestApiWeb.Api.PractitionerController do
   action_fallback NdbRestApiWeb.FallbackController
 
   def index(conn, _params) do
-    practitioners = Practitioners.list_practitioners() |> Repo.preload(:hospitals)
+    practitioners = Practitioners.list_practitioners() |> Repo.preload([:gender, :role, :hospitals])
     render(conn, :index, practitioners: practitioners)
   end
 
@@ -23,12 +23,12 @@ defmodule NdbRestApiWeb.Api.PractitionerController do
   end
 
   def show(conn, %{"id" => id}) do
-    practitioner = Practitioners.get_practitioner!(id) |> Repo.preload(:hospitals)
+    practitioner = Practitioners.get_practitioner!(id) |> Repo.preload([:gender, :role, :hospitals])
     render(conn, :show, practitioner: practitioner)
   end
 
   def update(conn, %{"id" => id, "practitioner" => practitioner_params}) do
-    practitioner = Practitioners.get_practitioner!(id) |> Repo.preload(:hospitals)
+    practitioner = Practitioners.get_practitioner!(id) |> Repo.preload([:gender, :role, :hospitals])
 
     with {:ok, %Practitioner{} = practitioner} <-
            Practitioners.update_practitioner(practitioner, practitioner_params) do
@@ -37,7 +37,7 @@ defmodule NdbRestApiWeb.Api.PractitionerController do
   end
 
   def delete(conn, %{"id" => id}) do
-    practitioner = Practitioners.get_practitioner!(id) |> Repo.preload(:hospitals)
+    practitioner = Practitioners.get_practitioner!(id) |> Repo.preload([:gender, :role, :hospitals])
 
     with {:ok, %Practitioner{}} <- Practitioners.delete_practitioner(practitioner) do
       send_resp(conn, :no_content, "")
@@ -48,7 +48,7 @@ defmodule NdbRestApiWeb.Api.PractitionerController do
   Searches a specific practitioner by email.
   """
   def search(conn, %{"email" => email}) do
-    practitioner = Practitioners.get_practitioner_by_email(email)
+    practitioner = Practitioners.get_practitioner_by_email(email) |> Repo.preload([:gender, :role, :hospitals])
     render(conn, :show, practitioner: practitioner)
   end
 end
