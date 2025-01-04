@@ -39,10 +39,11 @@ spec:
         - name: POSTGRES_HOST
           value: "ndb-service.default.svc.cluster.local"
         - name: POSTGRES_PORT
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: POSTGRES_PORT
+          value: "5432"
+          # valueFrom:
+          #   secretKeyRef:
+          #     name: postgres-secret
+          #     key: POSTGRES_PORT
         - name: DATABASE_URL
           value: "ecto://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(POSTGRES_HOST):$(POSTGRES_PORT)/$(POSTGRES_DB)"
         - name: SECRET_KEY_BASE
@@ -50,6 +51,8 @@ spec:
             secretKeyRef:
               name: postgres-secret
               key: SECRET_KEY_BASE
+        - name: FORCE_MIGRATIONS
+          value: "true"
 ---
 apiVersion: v1
 kind: Service

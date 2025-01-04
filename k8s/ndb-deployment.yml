@@ -48,11 +48,11 @@ kind: Service
 metadata:
   name: ndb-service
 spec:
-  type: NodePort
+  # type: NodePort
   ports:
   - port: 5432
     targetPort: 5432
-    nodePort: 30001
+    # nodePort: 30001
   selector:
     app: ndb-postgres
 ---
