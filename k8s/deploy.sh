@@ -39,6 +39,9 @@ else
     echo "Secret 'postgres-secret' created successfully."
 fi
 
+# Be careful with the following commands
+kubectl delete pvc --all && kubectl delete pv --all
+
 kubectl apply -f ndb-deployment.yml
 
 kubectl apply -f ndb-rest-api-deployment.yml
