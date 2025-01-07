@@ -16,11 +16,22 @@ defmodule NdbRestApiWeb.Api.PatientController do
   end
 
   def create(conn, %{"patient" => patient_params}) do
-    with {:ok, %Patient{} = patient} <- Patients.create_patient(patient_params) do
+    # Gender is passed as its name, so we need to retrieve the gender id
+    gender = NdbRestApi.Genders.get_by_name!(Map.fetch!(patient_params, "gender"))
+
+    full_patient = patient_params
+      |> Map.put("gender_id", gender.id)
+      |> Map.delete("gender")
+
+    with {:ok, %Patient{} = patient} <- Patients.create_patient(full_patient)
+       do
       conn
       |> put_status(:created)
       |> put_resp_header("location", ~p"/api/patients/#{patient}")
-      |> render(:show, patient: patient)
+      |> render(:show, patient:
+        patient
+        |> Repo.preload([:gender, :medication_requests, :observations, :conditions])
+      )
     end
   end
 
