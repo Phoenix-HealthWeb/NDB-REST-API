@@ -29,12 +29,6 @@ defmodule NdbRestApiWeb.Api.PatientController do
     method = Map.get(all_params, "method")
     IO.inspect(method)
 
-    # switch method do
-    #   "cf" -> get_by_cf(id)
-    #   "id" -> get_by_id(id)
-    #   _ -> get_by_id(id)
-    # end
-
     patient =
       case method do
         "cf" -> get_by_cf(id)
@@ -46,15 +40,13 @@ defmodule NdbRestApiWeb.Api.PatientController do
   end
 
   def get_by_id(id) do
-    patient =
-      Patients.get_patient!(id)
-      |> Repo.preload([:gender, :medication_requests, :observations, :conditions])
+    Patients.get_patient!(id)
+    |> Repo.preload([:gender, :medication_requests, :observations, :conditions])
   end
 
   def get_by_cf(cf) do
-    patient =
-      Patients.find_patient_by_cf!(cf)
-      |> Repo.preload([:gender, :medication_requests, :observations, :conditions])
+    Patients.find_patient_by_cf!(cf)
+    |> Repo.preload([:gender, :medication_requests, :observations, :conditions])
   end
 
   def update(conn, %{"id" => id, "patient" => patient_params}) do
