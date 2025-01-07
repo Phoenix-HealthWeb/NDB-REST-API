@@ -28,6 +28,7 @@ defmodule NdbRestApiWeb.Router do
     pipe_through :api
 
     resources "/genders", GenderController
+    get "/patients/cf/:cf", PatientController, :get_by_cf
     resources "/patients", PatientController
     resources "/practitioner_roles", PractitionerRoleController
     resources "/hospitals", HospitalController
