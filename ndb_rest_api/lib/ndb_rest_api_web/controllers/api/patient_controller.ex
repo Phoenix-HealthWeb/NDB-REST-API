@@ -32,6 +32,14 @@ defmodule NdbRestApiWeb.Api.PatientController do
     render(conn, :show, patient: patient)
   end
 
+  def get_by_cf(conn, %{"cf" => cf}) do
+    patient =
+      Patients.find_patient_by_cf!(cf)
+      |> Repo.preload([:gender, :medication_requests, :observations, :conditions])
+
+    render(conn, :show, patient: patient)
+  end
+
   def update(conn, %{"id" => id, "patient" => patient_params}) do
     patient = Patients.get_patient!(id)
 

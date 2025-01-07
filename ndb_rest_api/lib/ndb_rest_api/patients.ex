@@ -38,6 +38,11 @@ defmodule NdbRestApi.Patients do
   def get_patient!(id), do: Repo.get!(Patient, id)
 
   @doc """
+  Finds a single patient by cf.
+  """
+  def find_patient_by_cf!(cf), do: Repo.get_by!(Patient, cf: cf)
+
+  @doc """
   Creates a patient.
 
   ## Examples

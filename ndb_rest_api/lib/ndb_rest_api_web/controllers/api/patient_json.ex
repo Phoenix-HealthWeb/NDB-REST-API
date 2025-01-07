@@ -21,6 +21,7 @@ defmodule NdbRestApiWeb.Api.PatientJSON do
       firstname: patient.firstname,
       lastname: patient.lastname,
       gender: patient.gender.name,
+      cf: patient.cf,
       date_of_birth: patient.date_of_birth,
       medication_requests: medication_requests(patient.medication_requests),
       observations: observations(patient.observations),
