@@ -17,12 +17,18 @@ defmodule NdbRestApiWeb.Api.ObservationController do
   end
 
   def create(conn, %{"observation" => observation_params}) do
+    full_observation = observation_params
+      |> Map.put("patient_id", observation_params |> Map.fetch!("patient") |> Map.fetch!("id"))
+      |> Map.put("practitioner_id", observation_params |> Map.fetch!("practitioner") |> Map.fetch!("id"))
+
     with {:ok, %Observation{} = observation} <-
-           Observations.create_observation(observation_params) do
+           Observations.create_observation(full_observation) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", ~p"/api/observations/#{observation}")
-      |> render(:show, observation: observation)
+      |> render(:show, observation: observation
+        |> Repo.preload([:patient, :practitioner])
+      )
     end
   end
 
