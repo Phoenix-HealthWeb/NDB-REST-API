@@ -18,7 +18,6 @@ defmodule NdbRestApiWeb.Api.PatientJSON do
   defp data(%Patient{} = patient) do
     %{
       id: patient.id,
-      cf: patient.cf,
       firstname: patient.firstname,
       lastname: patient.lastname,
       gender: patient.gender.name,
