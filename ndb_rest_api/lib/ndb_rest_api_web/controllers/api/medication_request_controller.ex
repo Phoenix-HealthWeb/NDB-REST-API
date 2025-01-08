@@ -17,12 +17,18 @@ defmodule NdbRestApiWeb.Api.MedicationRequestController do
   end
 
   def create(conn, %{"medication_request" => medication_request_params}) do
+    full_medication_request = medication_request_params
+      |> Map.put("patient_id", medication_request_params |> Map.fetch!("patient") |> Map.fetch!("id"))
+      |> Map.put("practitioner_id", medication_request_params |> Map.fetch!("practitioner") |> Map.fetch!("id"))
+
     with {:ok, %MedicationRequest{} = medication_request} <-
-           MedicationRequests.create_medication_request(medication_request_params) do
+           MedicationRequests.create_medication_request(full_medication_request) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", ~p"/api/medication_requests/#{medication_request}")
-      |> render(:show, medication_request: medication_request)
+      |> render(:show, medication_request: medication_request
+        |> Repo.preload([:patient, :practitioner])
+      )
     end
   end
 
