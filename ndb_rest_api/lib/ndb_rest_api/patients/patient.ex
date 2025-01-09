@@ -20,5 +20,7 @@ defmodule NdbRestApi.Patients.Patient do
     patient
     |> cast(attrs, [:firstname, :lastname, :cf, :gender_id, :date_of_birth])
     |> validate_required([:firstname, :lastname, :cf, :gender_id, :date_of_birth])
+    |> unsafe_validate_unique(:cf, NdbRestApi.Repo)
+    |> unique_constraint(:cf)
   end
 end

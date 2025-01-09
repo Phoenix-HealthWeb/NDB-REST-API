@@ -101,4 +101,12 @@ defmodule NdbRestApi.Genders do
   def change_gender(%Gender{} = gender, attrs \\ %{}) do
     Gender.changeset(gender, attrs)
   end
+
+  @doc """
+  Returns a gender given its name
+  """
+  def get_by_name!(name) do
+    Gender
+    |> Repo.get_by!(name: name)
+  end
 end
