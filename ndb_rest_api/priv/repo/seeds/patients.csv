@@ -1,0 +1,13 @@
+firstname,lastname,cf,date_of_birth,gender_id
+John,Doe,JD123456,1980-01-01,1
+Jane,Smith,JS654321,1990-02-02,2
+Alice,Johnson,AJ789012,1985-03-03,3
+Bob,Brown,BB234567,1975-04-04,1
+Carol,White,CW345678,1988-05-05,2
+David,Black,DB456789,1992-06-06,1
+Eve,Green,EG567890,1983-07-07,2
+Frank,Blue,FB678901,1979-08-08,1
+Grace,Red,GR789012,1995-09-09,2
+Hank,Yellow,HY890123,1982-10-10,1
+Ivy,Purple,IP901234,1991-11-11,2
+Jack,Orange,JO012345,1987-12-12,1
