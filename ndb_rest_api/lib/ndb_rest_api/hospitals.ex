@@ -39,6 +39,24 @@ defmodule NdbRestApi.Hospitals do
   def get_hospital!(id), do: Repo.get!(Hospital, id)
 
   @doc """
+  Gets a single hospital.
+
+  Returns `nil` if the Hospital does not exist.
+
+  ## Examples
+
+      iex> get_hospital(123)
+      %Hospital{}
+
+      iex> get_hospital(456)
+      nil
+
+  """
+  def get_hospital(id) do
+    Repo.get(Hospital, id)
+  end
+
+  @doc """
   Creates a hospital.
 
   ## Examples

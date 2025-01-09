@@ -25,7 +25,7 @@ defmodule NdbRestApiWeb.Router do
 
   # Other scopes may use custom stacks.
   scope "/api", NdbRestApiWeb.Api, as: :api do
-    pipe_through :api
+    pipe_through [:api, NdbRestApiWeb.ApiKeyAuth]
 
     resources "/genders", GenderController
     get "/patients/cf/:cf", PatientController, :get_by_cf

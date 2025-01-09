@@ -22,7 +22,6 @@ defmodule NdbRestApiWeb.Api.HospitalJSON do
       address: hospital.address,
       region: hospital.region,
       notes: hospital.notes,
-      api_key: hospital.api_key
     }
   end
 end
