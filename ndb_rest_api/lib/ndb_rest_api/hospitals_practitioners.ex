@@ -3,7 +3,8 @@ defmodule NdbRestApi.HospitalsPractitioners do
   import Ecto.Changeset
 
   schema "hospitals_practitioners" do
-
+    field :hospital_id, :id
+    field :practitioner_id, :id
 
     timestamps(type: :utc_datetime)
   end
@@ -11,7 +12,7 @@ defmodule NdbRestApi.HospitalsPractitioners do
   @doc false
   def changeset(hospitals_practitioners, attrs) do
     hospitals_practitioners
-    |> cast(attrs, [])
-    |> validate_required([])
+    |> cast(attrs, [:hospital_id, :practitioner_id])
+    |> validate_required([:hospital_id, :practitioner_id])
   end
 end
