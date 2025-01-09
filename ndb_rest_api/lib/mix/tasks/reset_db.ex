@@ -64,7 +64,14 @@ defmodule Mix.Tasks.ResetDb do
     |> File.stream!()
     |> CSV.decode(headers: true)
     |> Enum.with_index(1)
-    |> Enum.each(fn {{:ok, %{"firstname" => firstname, "lastname" => lastname, "cf" => cf, "date_of_birth" => date_of_birth, "gender_id" => gender_id}}, index} ->
+    |> Enum.each(fn {{:ok,
+                      %{
+                        "firstname" => firstname,
+                        "lastname" => lastname,
+                        "cf" => cf,
+                        "date_of_birth" => date_of_birth,
+                        "gender_id" => gender_id
+                      }}, index} ->
       %Patient{
         id: index,
         firstname: firstname,
@@ -93,7 +100,16 @@ defmodule Mix.Tasks.ResetDb do
     |> File.stream!()
     |> CSV.decode(headers: true)
     |> Enum.with_index(1)
-    |> Enum.each(fn {{:ok, %{"forename" => forename, "surname" => surname, "email" => email, "gender_id" => gender_id, "role_id" => role_id, "date_of_birth" => date_of_birth, "qualification" => qualification}}, index} ->
+    |> Enum.each(fn {{:ok,
+                      %{
+                        "forename" => forename,
+                        "surname" => surname,
+                        "email" => email,
+                        "gender_id" => gender_id,
+                        "role_id" => role_id,
+                        "date_of_birth" => date_of_birth,
+                        "qualification" => qualification
+                      }}, index} ->
       %Practitioner{
         id: index,
         forename: forename,
@@ -113,13 +129,21 @@ defmodule Mix.Tasks.ResetDb do
     |> File.stream!()
     |> CSV.decode(headers: true)
     |> Enum.with_index(1)
-    |> Enum.each(fn {{:ok, %{"name" => name, "address" => address, "region" => region, "notes" => notes}}, index} ->
+    |> Enum.each(fn {{:ok,
+                      %{
+                        "name" => name,
+                        "address" => address,
+                        "region" => region,
+                        "notes" => notes,
+                        "api_key" => api_key
+                      }}, index} ->
       %Hospital{
         id: index,
         name: name,
         address: address,
         region: region,
-        notes: notes
+        notes: notes,
+        api_key: Bcrypt.hash_pwd_salt(api_key)
       }
       |> Repo.insert!()
     end)
