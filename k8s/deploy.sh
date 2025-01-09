@@ -40,7 +40,18 @@ else
 fi
 
 # Be careful with the following commands
-kubectl delete pvc --all && kubectl delete pv --all
+if kubectl get pvc --all &>/dev/null; then
+    echo "Persistent Volume Claims already exist. Skipping creation."
+else
+    kubectl delete pvc --all
+    echo "Persistent Volume Claims created successfully."
+fi
+if kubectl get pv --all &>/dev/null; then
+    echo "Persistent Volumes already exist. Skipping creation."
+else
+    kubectl delete pv --all
+    echo "Persistent Volumes created successfully."
+fi
 
 kubectl apply -f ndb-deployment.yml
 
