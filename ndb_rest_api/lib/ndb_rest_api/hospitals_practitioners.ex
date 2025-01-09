@@ -2,11 +2,10 @@ defmodule NdbRestApi.HospitalsPractitioners do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @primary_key false
   schema "hospitals_practitioners" do
-    field :hospital_id, :id
-    field :practitioner_id, :id
-
-    timestamps(type: :utc_datetime)
+    field :hospital_id, :id, primary_key: true
+    field :practitioner_id, :id, primary_key: true
   end
 
   @doc false
