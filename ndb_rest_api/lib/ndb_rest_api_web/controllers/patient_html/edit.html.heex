@@ -3,6 +3,6 @@
 <:subtitle>Use this form to manage patient records in your database.</:subtitle>
 </.header>
 
-<.patient_form changeset={@changeset} patients={@patients} genders={@genders} action={~p"/patients/#{@patient}"} />
+<.patient_form changeset={@changeset} genders={@genders} action={~p"/patients/#{@patient}"} />
 
 <.back navigate={~p"/patients"}>Back to patients</.back>
