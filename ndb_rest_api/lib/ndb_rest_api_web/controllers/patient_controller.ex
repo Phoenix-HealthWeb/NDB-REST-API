@@ -25,7 +25,8 @@ defmodule NdbRestApiWeb.PatientController do
         |> redirect(to: ~p"/patients/#{patient}")
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, :new, changeset: changeset)
+        genders = Genders.list_genders()
+        render(conn, :new, changeset: changeset, genders: genders)
     end
   end
 
