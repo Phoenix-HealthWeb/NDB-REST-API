@@ -7,7 +7,6 @@ defmodule NdbRestApiWeb.PatientHTML do
   Renders a patient form.
   """
   attr :changeset, Ecto.Changeset, required: true
-  # attr :patients, :list, required: true
   attr :genders, :list, required: true
   attr :action, :string, required: true
 
